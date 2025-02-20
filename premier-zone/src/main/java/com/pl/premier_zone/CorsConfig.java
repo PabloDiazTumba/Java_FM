@@ -1,4 +1,4 @@
-package com.pl.premier_zone;
+package src.main.java.com.pl.premier_zone;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
