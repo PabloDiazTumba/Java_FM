@@ -28,7 +28,9 @@ public class Player {
         this.name = name;
     }
 
-    public Player(String name, String nation, String pos, int age, int mp, int starts, double min, double gls, double ast, double pk, double crdy, double crdr, double xg, double xag, String team) {
+    public Player(String name, String nation, String pos, int age, int mp, int starts, double min,
+                  double gls, double ast, double pk,
+                  double crdy, double crdr, double xg, double xag, String team) {
         this.name = name;
         this.nation = nation;
         this.pos = pos;
