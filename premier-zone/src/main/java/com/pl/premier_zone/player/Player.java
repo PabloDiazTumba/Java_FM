@@ -3,15 +3,20 @@ package com.pl.premier_zone.player;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "player_stats")
+@Table(name = "player_statistic")
 public class Player {
     @Id
-    @Column(name = "name", unique = true)
+    @Column(name = "player_name", unique = true) // Se till att kolumnnamnet matchar databasen
     private String name;
+
     private String nation;
+    @Column(name = "position")
     private String pos;
     private Integer age;
-    private Integer mp;
+
+    @Column(name = "matches_played") // matcha databaskolumnnamnet om det inte är korrekt
+    private Integer mp = 0; // Sätt ett standardvärde här
+
     private Integer starts;
     private Double min;
     private Double gls;
@@ -21,16 +26,16 @@ public class Player {
     private Double crdr;
     private Double xg;
     private Double xag;
+
+    @Column(name = "team_name") // matcha med databasens kolumnnamn
     private String team;
 
-
-    public Player(String name) {
-        this.name = name;
+    // Konstruktorer och getters/setters
+    public Player() {
     }
 
-    public Player(String name, String nation, String pos, int age, int mp, int starts, double min,
-                  double gls, double ast, double pk,
-                  double crdy, double crdr, double xg, double xag, String team) {
+    public Player(String name, String nation, String pos, Integer age, Integer mp, Integer starts, Double min,
+                  Double gls, Double ast, Double pk, Double crdy, Double crdr, Double xg, Double xag, String team) {
         this.name = name;
         this.nation = nation;
         this.pos = pos;
@@ -46,10 +51,6 @@ public class Player {
         this.xg = xg;
         this.xag = xag;
         this.team = team;
-    }
-
-    public Player() {
-
     }
 
     public String getName() {
@@ -77,7 +78,7 @@ public class Player {
     }
 
     public int getAge() {
-        return age;
+        return age != null ? age : 0;  // Om age är null, sätt 0 som standard
     }
 
     public void setAge(int age) {
@@ -101,7 +102,7 @@ public class Player {
     }
 
     public double getMin() {
-        return min;
+        return min != null ? min : 0.0;  // Om min är null, sätt 0 som standard
     }
 
     public void setMin(double min) {
@@ -109,7 +110,7 @@ public class Player {
     }
 
     public double getGls() {
-        return gls;
+        return gls != null ? gls : 0.0;
     }
 
     public void setGls(double gls) {
@@ -117,7 +118,7 @@ public class Player {
     }
 
     public double getAst() {
-        return ast;
+        return ast != null ? ast : 0.0;
     }
 
     public void setAst(double ast) {
@@ -125,7 +126,7 @@ public class Player {
     }
 
     public double getPk() {
-        return pk;
+        return pk != null ? pk : 0.0;
     }
 
     public void setPk(double pk) {
@@ -133,7 +134,7 @@ public class Player {
     }
 
     public double getCrdy() {
-        return crdy;
+        return crdy != null ? crdy : 0.0;
     }
 
     public void setCrdy(double crdy) {
@@ -141,7 +142,7 @@ public class Player {
     }
 
     public double getCrdr() {
-        return crdr;
+        return crdr != null ? crdr : 0.0;
     }
 
     public void setCrdr(double crdr) {
@@ -149,7 +150,7 @@ public class Player {
     }
 
     public double getXg() {
-        return xg;
+        return xg != null ? xg : 0.0;
     }
 
     public void setXg(double xg) {
@@ -157,7 +158,7 @@ public class Player {
     }
 
     public double getXag() {
-        return xag;
+        return xag != null ? xag : 0.0;
     }
 
     public void setXag(double xag) {

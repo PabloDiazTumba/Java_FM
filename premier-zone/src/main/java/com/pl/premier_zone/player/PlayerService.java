@@ -18,6 +18,7 @@ public class PlayerService {
     public PlayerService(PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;
     }
+
     public List<Player> getPlayers() {
         return playerRepository.findAll();
     }
@@ -36,25 +37,29 @@ public class PlayerService {
 
     public List<Player> getPlayersByPos(String searchText) {
         return playerRepository.findAll().stream()
-                .filter(player -> player.getPos().toLowerCase().contains(searchText.toLowerCase()))
+                .filter(player -> player.getPos() != null && player.getPos().toLowerCase().contains(searchText.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
     public List<Player> getPlayersByNation(String searchText) {
         return playerRepository.findAll().stream()
-                .filter(player -> player.getNation().toLowerCase().contains(searchText.toLowerCase()))
+                .filter(player -> player.getNation() != null && player.getNation().toLowerCase().contains(searchText.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
-    public List<Player> getPlayersByTeamAndPosition(String team, String position){
+    public List<Player> getPlayersByTeamAndPosition(String team, String position) {
         return playerRepository.findAll().stream()
-                .filter(player -> team.equals(player.getTeam()) && position.equals(player.getPos()))
+                .filter(player ->
+                        team != null && team.equals(player.getTeam()) &&
+                                position != null && position.equals(player.getPos()))
                 .collect(Collectors.toList());
     }
+
     public Player addPlayer(Player player) {
         playerRepository.save(player);
         return player;
     }
+
     public Player updatePlayer(Player updatedPlayer) {
         Optional<Player> existingPlayer = playerRepository.findByName(updatedPlayer.getName());
 
@@ -69,6 +74,7 @@ public class PlayerService {
         }
         return null;
     }
+
     @Transactional
     public void deletePlayer(String playerName) {
         playerRepository.deleteByName(playerName);
